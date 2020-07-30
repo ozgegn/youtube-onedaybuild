@@ -15,9 +15,9 @@ class Model {
         let url = URL(string: Constants.API_URL)!
         
         /*
-        guard url != nil else{
-            return
-        }*/
+         guard url != nil else{
+         return
+         }*/
         
         //Get URL session object
         let session = URLSession.shared
@@ -30,8 +30,17 @@ class Model {
                 return
             }
             
-            //Parsing the data into video objects
-            
+            do {
+                //Parsing the data into video objects
+                let decoder = JSONDecoder()
+                decoder.dateDecodingStrategy = .iso8601
+                let response = try decoder.decode(Response.self, from: data!)
+                
+                dump(response)
+                
+            }catch {
+                
+            }
             
         }
         
